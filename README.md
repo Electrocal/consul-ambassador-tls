@@ -41,7 +41,7 @@ $ kubectl create namespace {name}
 
 Clone this repo locally. A few small modifications are needed to set your namespaces & DC name. I've tried to make this a little bit simpler by adding `{namespace}` and `{datacenter}` where you need to set this.
 
-consul-values.yaml is set with a few values from this guide, modify it to what you need by following this tutorial: 
+consul-values.yaml is set with a few values from this guide, you can modify it to what you need by following this tutorial: 
  https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes 
 
 ---
@@ -56,7 +56,7 @@ $ helm repo add hashicorp https://helm.releases.hashicorp.com
 To run this command, you will need the Consul binary installed to your local machine
 
 ```
-$ kubectl create secret generic consul-gossip-encryption-key --from-literal=key=$(consul keygen) -n system
+$ kubectl create secret generic consul-gossip-encryption-key --from-literal=key=$(consul keygen) -n {namespace}
 ```
 
 Install Consul using the following command:
