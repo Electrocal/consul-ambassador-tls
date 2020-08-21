@@ -1,0 +1,32 @@
+# https://www.consul.io/docs/k8s/helm.html For all options & documentation
+# https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes - Securing TLS / Gossip / ACL
+
+global:
+  name: consul # setting the name here to just 'consul' will let you work with resources as 'consul-server-0' instead of 'consul-consul-server-0'
+  enabled: true
+  datacenter: {datacenter}
+
+  gossipEncryption:
+    secretName: "consul-gossip-encryption-key"
+    secretKey: "key"
+
+  tls:
+    enabled: true
+    enableAutoEncrypt: true
+    serverAdditionalDNSSANs: ["'consul-server.{namespace}.svc.cluster.local'"] # Enabling an additional SAN for the ConsulResolver
+    verify: true
+
+  acls:
+    manageSystemACLs: true # Optional, but far more secure to enable
+
+server:
+  replicas: 2 
+  bootstrapExpect: 2
+
+syncCatalog: # again entirely optional, like everything here
+  default: true # true will sync by default, otherwise requires annotation
+  toConsul: true 
+  toK8S: true
+
+connectInject:
+  enabled: true
