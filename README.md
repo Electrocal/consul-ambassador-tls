@@ -34,16 +34,15 @@ A: I've only provided the files needed to get this to work with TLS, for everyth
 
 ### Set up
 
-1. Create a dedicated namespace for ambassador/consul: 
+Create a dedicated namespace for ambassador/consul: 
 ```
-kubectl create namespace {name}
+$ kubectl create namespace {name}
 ```
 
-2. Clone this repo locally
-   2a. A few small modifications are needed to set your namespaces & DC name. I've tried to make this a little bit simpler by adding `{namespace}` where you need to set this.
+Clone this repo locally. A few small modifications are needed to set your namespaces & DC name. I've tried to make this a little bit simpler by adding `{namespace}` and `{datacenter}` where you need to set this.
 
-   consul-values.yaml is set with a few values from this guide, modify it to what you need by following this tutorial: 
-   https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes 
+consul-values.yaml is set with a few values from this guide, modify it to what you need by following this tutorial: 
+ https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes 
 
 ---
 
