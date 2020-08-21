@@ -2,7 +2,7 @@
 apiVersion: getambassador.io/v2
 kind: ConsulResolver
 metadata:
-  name: consul-kubernetes
+  name: consul-{datacenter}
 spec:
   address: https://consul-server.default.svc.cluster.local:8501
   datacenter: kubernetes
