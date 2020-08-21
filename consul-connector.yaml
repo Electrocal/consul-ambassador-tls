@@ -4,5 +4,5 @@ kind: ConsulResolver
 metadata:
   name: consul-{datacenter}
 spec:
-  address: https://consul-server.default.svc.cluster.local:8501
-  datacenter: kubernetes
+  address: https://consul-server.{namespace}.svc.cluster.local:8501
+  datacenter: {datacenter}
