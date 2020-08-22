@@ -2,7 +2,7 @@
 # https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes - Securing TLS / Gossip / ACL
 
 global:
-  name: consul # setting the name here to just 'consul' will let you work with resources as 'consul-server-0' instead of 'consul-consul-server-0'
+  name: consul # setting the name here to just 'consul' will let you work with resources as 'consul-server-0' instead of 'consul-consul-server-0'
   enabled: true
   datacenter: {datacenter}
 
@@ -20,12 +20,12 @@ global:
     manageSystemACLs: true # Optional, but far more secure to enable
 
 server:
-  replicas: 2 
+  replicas: 2
   bootstrapExpect: 2
 
 syncCatalog: # again entirely optional, like everything here
   default: true # true will sync by default, otherwise requires annotation
-  toConsul: true 
+  toConsul: true
   toK8S: true
 
 connectInject:
