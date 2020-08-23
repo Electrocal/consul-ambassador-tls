@@ -1,0 +1,51 @@
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: wildcard-host
+spec:
+  hostname: "*"
+  acmeProvider:
+    authority: none
+  tlsSecret:
+    name: ambassador-certs
+  selector:
+    matchLabels:
+      hostname: wildcard-host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ambassador
+  labels:
+    app.kubernetes.io/component: ambassador-service
+    service: ambassador
+    name: ambassador
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Module
+      name: tls
+      config:
+        server:
+          enabled: True
+          redirect_cleartext_from: 80
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    service: ambassador
