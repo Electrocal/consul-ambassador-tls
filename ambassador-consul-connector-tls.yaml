@@ -25,7 +25,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: ambassador-consul-connect
-    namespace: default
+    namespace: {namespace}
 ---
 apiVersion: getambassador.io/v2
 kind: TLSContext
