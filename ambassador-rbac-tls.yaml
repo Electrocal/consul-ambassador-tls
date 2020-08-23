@@ -61,7 +61,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: ambassador
-    namespace: default
+    namespace: {namespace}
 ---
 apiVersion: apps/v1
 kind: Deployment
