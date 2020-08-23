@@ -34,12 +34,12 @@ A: I've only provided the files needed to get this to work with TLS, for everyth
 
 ### Set up
 
-Create a dedicated namespace for ambassador/consul: 
-```
-$ kubectl create namespace {name}
-```
+Clone this repo locally. A few small modifications are needed to set your namespaces & DC name. 
+I've tried to make this a little bit simpler by creating a `setup.sh` script which will prompt & set the values.
 
-Clone this repo locally. A few small modifications are needed to set your namespaces & DC name. I've tried to make this a little bit simpler by adding `{namespace}` and `{datacenter}` where you need to set this.
+```sh
+chmod +x setup.sh && ./setup.sh
+```
 
 consul-values.yaml is set with a few values from this guide, you can modify it to what you need by following this tutorial: 
  https://learn.hashicorp.com/tutorials/consul/kubernetes-secure-agents?in=consul/kubernetes 
@@ -49,18 +49,18 @@ consul-values.yaml is set with a few values from this guide, you can modify it t
 ### Consul
 
 Get the Hashicorp repository:
-```
+```sh
 $ helm repo add hashicorp https://helm.releases.hashicorp.com
 ```
 **Important if using ACLs (just skip if not): Create the shared gossip encryption key**
 To run this command, you will need the Consul binary installed to your local machine
 
-```
+```sh
 $ kubectl create secret generic consul-gossip-encryption-key --from-literal=key=$(consul keygen) -n {namespace}
 ```
 
 Install Consul using the following command:
-```
+```sh
 $ helm install consul -f consul-values.yaml hashicorp/consul -n {namespace}
 ```
 
@@ -70,20 +70,26 @@ $ helm install consul -f consul-values.yaml hashicorp/consul -n {namespace}
 
 The ambassador install is relatively straightforward but is broken into a few files while I work on forking & building a workable helm chart:
 
-```
+```sh
 $ kubectl apply -f ambassador-rbac-tls.yaml -n {namespace}
 ```
 
-```
+```sh
 $ kubectl apply -f consul-resolver.yaml -n {namespace}
 ```
 
-```
+```sh
 $ kubectl apply -f ambassador-consul-connector-tls.yaml -n {namespace}
 ```
 
+Load your public certificate in as a kubernetes secret:
+
+```sh
+kubectl create secret tls ambassador-certs --cert=certificate.pem --key=key.pem -n {namespace}
 ```
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-service.yaml -n {namespace}
+Deploy the ambassador service:
+```sh
+$ kubectl apply -f ambassador-service-tls.yaml -n {namespace}
 ```
 
 You should now have the required dependencies all set up for Ambassador to connect over TLS to Consul! 
