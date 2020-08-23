@@ -18,15 +18,9 @@ Q: **Why isn't this just a Helm chart???**
 
 A: I eventually plan to modify this into a singular Helm chart `values.yaml` file so people don't have to install these one by one. 
 
-Q: **Anything I should worry with namespaces?**
+Q: **Namespaces?**
 
 A: As secrets don't travel well, follow the getting started guide below, making sure to *install both Consul & Ambassador to the same namespace*.
-
-Q: **Am I missing any files I need to get started?**
-
-A: I've only provided the files needed to get this to work with TLS, for everything else such as the ambassador service, I'd follow this documentation:
- - https://www.consul.io/docs/k8s/ambassador
- - https://www.getambassador.io/docs/latest/howtos/consul/
  
 ---
 
