@@ -68,6 +68,12 @@ The ambassador install is relatively straightforward but is broken into a few fi
 $ kubectl apply -f ambassador-rbac-tls.yaml -n {namespace}
 ```
 
+Install the required CRDs
+
+```
+$ kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+```
+
 ```sh
 $ kubectl apply -f consul-resolver.yaml -n {namespace}
 ```
