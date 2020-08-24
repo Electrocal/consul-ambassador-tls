@@ -71,7 +71,7 @@ $ kubectl apply -f ambassador-rbac-tls.yaml -n {namespace}
 Install the required CRDs
 
 ```
-$ kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+$ kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml -n {namespace}
 ```
 
 ```sh
