@@ -13,7 +13,8 @@ echo '[+] Modifying setup files with new values'
 mod_files="ambassador-consul-connector-tls.yaml
            ambassador-rbac-tls.yaml
            consul-resolver.yaml
-           consul-values.yaml"
+           consul-values.yaml
+           README.md"
 
 for file in $mod_files
     do
