@@ -30,6 +30,7 @@ A: As secrets don't travel well, follow the getting started guide below, making 
 
 Clone this repo locally. A few small modifications are needed to set your namespaces & DC name. 
 I've tried to make this a little bit simpler by creating a `setup.sh` script which will prompt & set the values.
+Once this is setup locally, you can copy & paste the commands from this README as they will also be replaced.
 
 ```sh
 chmod +x setup.sh && ./setup.sh
