@@ -20,7 +20,7 @@ A: I eventually plan to modify this into a singular Helm chart `values.yaml` fil
 
 Q: **Namespaces?**
 
-A: As secrets don't travel well, follow the getting started guide below, making sure to *install both Consul & Ambassador to the same namespace*.
+A: As secrets don't travel well, follow the getting started guide below, making sure to *install both Consul & Ambassador to the same namespace*. I've found that I get inconsistent results with namespacing this cleanly, and would generally suggest installing this to the default namespace, then create another namespace for any applications you intend to deploy.
  
 ---
 
@@ -33,7 +33,7 @@ I've tried to make this a little bit simpler by creating a `setup.sh` script whi
 Once this is setup locally, you can copy & paste the commands from this README as they will also be replaced.
 
 ```sh
-chmod +x setup.sh && ./setup.sh
+$ chmod +x setup.sh && ./setup.sh
 ```
 
 consul-values.yaml is set with a few values from this guide, you can modify it to what you need by following this tutorial: 
@@ -86,7 +86,7 @@ $ kubectl apply -f ambassador-consul-connector-tls.yaml -n {namespace}
 Load your public certificate in as a kubernetes secret:
 
 ```sh
-kubectl create secret tls ambassador-certs --cert=certificate.pem --key=key.pem -n {namespace}
+$ kubectl create secret tls ambassador-certs --cert=certificate.pem --key=key.pem -n {namespace}
 ```
 Deploy the ambassador service:
 ```sh
