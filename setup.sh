@@ -5,7 +5,7 @@ read varnamespace
 
 kubectl create ns $varnamespace
 
-echo "[?] Value for datacenter: "
+echo "[?] Value for datacenter ('default' namespace is recommended): "
 read vardatacenter
 
 echo '[+] Modifying setup files with new values'
