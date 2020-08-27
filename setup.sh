@@ -52,19 +52,19 @@ launch_deployment(){
 
 
 # Getting variables from user
-echo "\nPlease reply to theses questions to automate the deployment"
-read -p "\nEnter your namespace target's name: " varnamespace
+printf "\nPlease reply to theses questions to automate the deployment \n"
+read -p "Enter your namespace target's name: " varnamespace
 
-echo "\n[?] datacenter name for Consul: "
+printf "\n[?] datacenter name for Consul: \n"
 read -p "Enter your datacenter target's name: " vardatacenter
 
-echo "\n[?] Value for certificate and key names, don't forget the extension: "
-echo "[?] example: myfullcert.crt "
-read -p "\nEnter your cert name: " certificate_name
-read -p "\nEnter your cert key: " certificate_key
+printf "\n[?] Value for certificate and key names, don't forget the extension: \n"
+printf "[?] example: myfullcert.crt "
+read -p "Enter your cert name: " certificate_name
+read -p "Enter your cert key: " certificate_key
 
 # Trigger functions 
-echo '[+] Modifying setup files with new values'
+printf '\n[+] Modifying setup files with new values'
 create_namespace ${varnamespace}
 values_replacement ${varnamespace} ${vardatacenter}
 launch_deployment ${varnamespace} ${certificate_name} ${certificate_key}
